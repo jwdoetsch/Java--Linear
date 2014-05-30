@@ -1,6 +1,4 @@
-package usr.doetsch.transform;
-import usr.doetsch.linalg.LinAlg;
-import usr.doetsch.linalg.Matrix;
+package usr.doetsch.linalg;
 
 /**
  * TransformationMatrixFactory provides factory methods that create
@@ -10,12 +8,34 @@ import usr.doetsch.linalg.Matrix;
  */
 public class TransformationMatrixFactory {
 	
+	/*
+	 * 
+	 */
 	private TransformationMatrixFactory () {
-		
+
 	}
 	
+	/**
+	 * Creates and returns a new TransformationMatrixFactory instance.
+	 * 
+	 * @return the new instance
+	 */
 	public static TransformationMatrixFactory createInstance () {
 		return new TransformationMatrixFactory();		
+	}
+	
+	/**
+	 * Creates and returns a new 4x4 identity matrix.
+	 * 
+	 * @return a Matrix instance encapsulating the identity matrix
+	 */
+	public Matrix createIdentityMatrix () {
+		double[][] m = {{1, 0, 0, 0},
+						{0, 1, 0, 0},
+						{0, 0, 1, 0},
+						{0, 0, 0, 1}};
+		
+		return Matrix.createMatrix(m);
 	}
 	
 	/**
@@ -111,14 +131,14 @@ public class TransformationMatrixFactory {
 	public static void main (String[] args) {
 		
 		TransformationMatrixFactory affines = TransformationMatrixFactory.createInstance();
-		
+				
 		double[][] p = {{0, 0, 1, 0},
 						{0, 1, 0, 0},
 						{0, 0, 0, 0},
 						{1, 1, 1, 1}};
 		
 		System.out.println(
-				LinAlg.multiply(
+				Matrix.multiply(
 						affines.createZAxisRotation(Math.PI),
 						Matrix.createMatrix(p)));
 		

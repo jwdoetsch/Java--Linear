@@ -5,17 +5,12 @@ public class Matrix {
 	public final double[][] cells;
 	
 	protected Matrix (double[][] matrix) {
-		//TODO check if row dimensions are symmetrical/rectangular
-		
+
 		this.cells = matrix;
 	}
 	
 	protected Matrix (int rows, int columns) {
-		if ((rows < 1) || columns < 1) {
-			throw new InvalidDimensionsException("Invalid matrix dimensions: "
-					+ rows + "x" + columns);
-		}
-		
+
 		this.cells = new double[rows][columns];
 	}
 	
@@ -72,6 +67,57 @@ public class Matrix {
 		return s;
 	}
 	
+	/**
+	 * Calculates and returns the product of the multiplication of the given matrices.
+	 *  
+	 * @param a
+	 * @param b
+	 * @return
+	 * @throws MatrixDimensionInconsistencyException
+	 */
+	public static Matrix multiply (Matrix a, Matrix b) {
+		Matrix c = Matrix.createMatrix(new double[a.getRows()][b.getColumns()]);
+		
+		for (int row = 0; row < c.getRows(); row++) {
+			for (int column = 0; column < c.getColumns(); column++) {
+				double sum = 0;
+				for (int i = 0; i < a.getColumns(); i++) {
+					sum += a.cells[row][i] * b.cells[i][column];
+				}
+				c.cells[row][column] = sum;
+			}
+		}
+		
+		
+		return c;
+	}
+	
+	/**
+	 * Calculates and returns the product of the multiplication of the given matrices.
+	 *  
+	 * @param a
+	 * @param b
+	 * @return
+	 * @throws MatrixDimensionInconsistencyException
+	 */
+	public static Matrix multiply (double[][] a, double[][] b) {
+		Matrix c = Matrix.createMatrix(new double[a.length][b[0].length]);
+		
+		for (int row = 0; row < c.getRows(); row++) {
+			for (int column = 0; column < c.getColumns(); column++) {
+				double sum = 0;
+				for (int i = 0; i < a[0].length; i++) {
+					sum += a[row][i] * b[i][column];
+				}
+				c.cells[row][column] = sum;
+			}
+		}
+		
+		
+		return c;
+	}
+	
+	
 	public static void main (String[] args) {
 		
 		double[][] a = {{1, 2, 3, 4},
@@ -91,10 +137,12 @@ public class Matrix {
 		
 		long then = System.currentTimeMillis();
 		int i = 0;
+		Matrix f = Matrix.createMatrix(1, 1);
+		
 		
 		while ((System.currentTimeMillis() - then) < 10000) {				
 			//System.out.println(Matrix.multiply(new Matrix(a), new Matrix(b)));
-			Matrix m = LinAlg.multiply(new Matrix(a), new Matrix(b));
+			Matrix m = Matrix.multiply(f.createMatrix(a), f.createMatrix(b));
 			i++;
 		}
 		
