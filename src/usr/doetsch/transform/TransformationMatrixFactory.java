@@ -2,12 +2,12 @@ package usr.doetsch.transform;
 import usr.doetsch.linalg.Matrix;
 
 /**
- * Matrix44 provides static methods that instantiate and return
- * affine transformation matrices.
+ * TransformationMatrixFactory provides factory methods that create
+ * and return 4x4 affine transformation matrices.
  * 
  * @author Jacob Wesley Doetsch
  */
-public class Matrix44 {
+public class TransformationMatrixFactory {
 	
 	/**
 	 * Creates and returns a new affine scaling matrix.
@@ -108,7 +108,7 @@ public class Matrix44 {
 		
 		System.out.println(
 				Matrix.multiply(
-						Matrix44.createZAxisRotation(Math.PI),
+						TransformationMatrixFactory.createZAxisRotation(Math.PI),
 						Matrix.createMatrix(p)));
 		
 	}
