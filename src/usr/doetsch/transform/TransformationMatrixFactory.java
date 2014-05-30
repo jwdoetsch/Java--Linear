@@ -1,4 +1,5 @@
 package usr.doetsch.transform;
+import usr.doetsch.linalg.LinAlg;
 import usr.doetsch.linalg.Matrix;
 
 /**
@@ -107,7 +108,7 @@ public class TransformationMatrixFactory {
 						{1, 1, 1, 1}};
 		
 		System.out.println(
-				Matrix.multiply(
+				LinAlg.multiply(
 						TransformationMatrixFactory.createZAxisRotation(Math.PI),
 						Matrix.createMatrix(p)));
 		

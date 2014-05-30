@@ -57,64 +57,7 @@ public class Matrix {
 		return new Matrix(rows, columns);
 	}
 	
-	/**
-	 * Calculates and returns the product of the multiplication of the given matrices.
-	 *  
-	 * @param a
-	 * @param b
-	 * @return
-	 * @throws MatrixDimensionInconsistencyException
-	 */
-	public static Matrix multiply (Matrix a, Matrix b) throws MatrixDimensionInconsistencyException {
-		Matrix c = createMatrix(new double[a.getRows()][b.getColumns()]);
-		
-		if (a.getColumns() != b.getRows()) {
-			throw new MatrixDimensionInconsistencyException();
-		}
-		
-		for (int row = 0; row < c.getRows(); row++) {
-			for (int column = 0; column < c.getColumns(); column++) {
-				double sum = 0;
-				for (int i = 0; i < a.getColumns(); i++) {
-					sum += a.cells[row][i] * b.cells[i][column];
-				}
-				c.cells[row][column] = sum;
-			}
-		}
-		
-		
-		return c;
-	}
-	
-	/**
-	 * Calculates and returns the product of the multiplication of the given matrices.
-	 *  
-	 * @param a
-	 * @param b
-	 * @return
-	 * @throws MatrixDimensionInconsistencyException
-	 */
-	public static Matrix multiply (double[][] a, double[][] b) throws MatrixDimensionInconsistencyException {
-		Matrix c = createMatrix(new double[a.length][b[0].length]);
-		
-		if (a[0].length != b.length) {
-			throw new MatrixDimensionInconsistencyException();
-		}
-		
-		for (int row = 0; row < c.getRows(); row++) {
-			for (int column = 0; column < c.getColumns(); column++) {
-				double sum = 0;
-				for (int i = 0; i < a[0].length; i++) {
-					sum += a[row][i] * b[i][column];
-				}
-				c.cells[row][column] = sum;
-			}
-		}
-		
-		
-		return c;
-	}
-	
+
 	@Override
 	public String toString () {
 		String s = "";
@@ -140,13 +83,18 @@ public class Matrix {
 						{12, 13, 14, 15},
 						{13, 14, 15, 16},
 						{14, 15, 16, 17}};
+
+//		double[][] b = {{11},
+//						{12},
+//						{13},
+//						{14}};
 		
 		long then = System.currentTimeMillis();
 		int i = 0;
 		
-		while ((System.currentTimeMillis() - then) < 1000) {				
+		while ((System.currentTimeMillis() - then) < 10000) {				
 			//System.out.println(Matrix.multiply(new Matrix(a), new Matrix(b)));
-			Matrix m = Matrix.multiply(new Matrix(a), new Matrix(b));
+			Matrix m = LinAlg.multiply(new Matrix(a), new Matrix(b));
 			i++;
 		}
 		
