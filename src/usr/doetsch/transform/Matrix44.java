@@ -7,7 +7,6 @@ import usr.doetsch.linalg.Matrix;
  * 
  * @author Jacob Wesley Doetsch
  */
-
 public class Matrix44 {
 	
 	/**
@@ -16,8 +15,7 @@ public class Matrix44 {
 	 * @param sx x-axis scalar
 	 * @param sy y-axis scalar
 	 * @param sz z-axis scalar
-	 * @return a Matrix instance encapsulating the affine scaling matrix defined
-	 * by the given scalar values
+	 * @return a Matrix instance encapsulating the transformation matrix
 	 */
 	public static Matrix createScalingMatrix (double sx, double sy, double sz) {
 
@@ -36,7 +34,7 @@ public class Matrix44 {
 	 * @param tx the x component of the translation vector
 	 * @param ty the y component of the translation vector
 	 * @param tz the z component of the translation vector
-	 * @return a Matrix instance encapsulating the affine translation matrix
+	 * @return a Matrix instance encapsulating the transformation matrix
 	 */
 	public static Matrix createTranslationMatrix (double tx, double ty, double tz) {
 
@@ -48,7 +46,13 @@ public class Matrix44 {
 		return Matrix.createMatrix(m);
 	}
 	
-	
+	/**
+	 * Creates and returns a new affine rotation matrix about the
+	 * x axis (within the z-y plane).
+	 * 
+	 * @param angle the angle of rotation, in radians
+	 * @return a Matrix instance encapsulating the transformation matrix
+	 */
 	public static Matrix createXAxisRotation (double angle) {	
 		
 		double[][] m = {{1, 0, 0, 0},
@@ -59,6 +63,13 @@ public class Matrix44 {
 		return Matrix.createMatrix(m);
 	}
 	
+	/**
+	 * Creates and returns a new affine rotation matrix about the
+	 * y axis (within the x-z plane).
+	 * 
+	 * @param angle the angle of rotation, in radians
+	 * @return a Matrix instance encapsulating the transformation matrix
+	 */
 	public static Matrix createYAxisRotation (double angle) {
 		
 		double[][] m = {{Math.cos(angle), 0, -Math.sin(angle), 0},
@@ -70,6 +81,13 @@ public class Matrix44 {
 
 	}
 	
+	/**
+	 * Creates and returns a new affine rotation matrix about the
+	 * z axis (within the x-y plane).
+	 * 
+	 * @param angle the angle of rotation, in radians
+	 * @return a Matrix instance encapsulating the transformation matrix
+	 */
 	public static Matrix createZAxisRotation (double angle) {
 		
 		double[][] m = {{Math.cos(angle), -Math.sin(angle), 0, 0},
