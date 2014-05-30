@@ -10,6 +10,14 @@ import usr.doetsch.linalg.Matrix;
  */
 public class TransformationMatrixFactory {
 	
+	private TransformationMatrixFactory () {
+		
+	}
+	
+	public static TransformationMatrixFactory createInstance () {
+		return new TransformationMatrixFactory();		
+	}
+	
 	/**
 	 * Creates and returns a new affine scaling matrix.
 	 * 
@@ -18,7 +26,7 @@ public class TransformationMatrixFactory {
 	 * @param sz z-axis scalar
 	 * @return a Matrix instance encapsulating the transformation matrix
 	 */
-	public static Matrix createScalingMatrix (double sx, double sy, double sz) {
+	public Matrix createScalingMatrix (double sx, double sy, double sz) {
 
 		double[][] m = {{sx, 0, 0, 0},
 						{0, sy, 0, 0},
@@ -37,7 +45,7 @@ public class TransformationMatrixFactory {
 	 * @param tz the z component of the translation vector
 	 * @return a Matrix instance encapsulating the transformation matrix
 	 */
-	public static Matrix createTranslationMatrix (double tx, double ty, double tz) {
+	public Matrix createTranslationMatrix (double tx, double ty, double tz) {
 
 		double[][] m = {{1, 0, 0, tx},
 						{0, 1, 0, ty},
@@ -54,7 +62,7 @@ public class TransformationMatrixFactory {
 	 * @param angle the angle of rotation, in radians
 	 * @return a Matrix instance encapsulating the transformation matrix
 	 */
-	public static Matrix createXAxisRotation (double angle) {	
+	public Matrix createXAxisRotation (double angle) {	
 		
 		double[][] m = {{1, 0, 0, 0},
 						{0, Math.cos(angle), -Math.sin(angle), 0},
@@ -71,7 +79,7 @@ public class TransformationMatrixFactory {
 	 * @param angle the angle of rotation, in radians
 	 * @return a Matrix instance encapsulating the transformation matrix
 	 */
-	public static Matrix createYAxisRotation (double angle) {
+	public Matrix createYAxisRotation (double angle) {
 		
 		double[][] m = {{Math.cos(angle), 0, -Math.sin(angle), 0},
 						{0, 1, 0, 0},
@@ -89,7 +97,7 @@ public class TransformationMatrixFactory {
 	 * @param angle the angle of rotation, in radians
 	 * @return a Matrix instance encapsulating the transformation matrix
 	 */
-	public static Matrix createZAxisRotation (double angle) {
+	public Matrix createZAxisRotation (double angle) {
 		
 		double[][] m = {{Math.cos(angle), -Math.sin(angle), 0, 0},
 						{Math.sin(angle), Math.cos(angle), 0, 0},
@@ -102,6 +110,8 @@ public class TransformationMatrixFactory {
 	
 	public static void main (String[] args) {
 		
+		TransformationMatrixFactory affines = TransformationMatrixFactory.createInstance();
+		
 		double[][] p = {{0, 0, 1, 0},
 						{0, 1, 0, 0},
 						{0, 0, 0, 0},
@@ -109,7 +119,7 @@ public class TransformationMatrixFactory {
 		
 		System.out.println(
 				LinAlg.multiply(
-						TransformationMatrixFactory.createZAxisRotation(Math.PI),
+						affines.createZAxisRotation(Math.PI),
 						Matrix.createMatrix(p)));
 		
 	}
