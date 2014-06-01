@@ -2,30 +2,63 @@ package usr.doetsch.linalg;
 
 public class Matrix {
 	
+	/**
+	 * 
+	 */
 	public final double[][] cells;
 	
-	protected Matrix (double[][] matrix) {
+	/*
+	 * Creates a new Matrix instance encapsulating the given
+	 * matrix. 
+	 */
+	private Matrix (double[][] matrix) {
 
 		this.cells = matrix;
 	}
 	
-	protected Matrix (int rows, int columns) {
+	/*
+	 * Creates a new Matrix instance encapsulating a matrix
+	 * with the given dimensions. 
+	 */
+	private Matrix (int rows, int columns) {
 
 		this.cells = new double[rows][columns];
 	}
 	
+	/**
+	 * Returns the number of rows in the matrix.
+	 * 
+	 * @return the number of rows
+	 */
 	public int getRows () {
 		return cells.length;
 	}
 	
+	/**
+	 * Returns the number of rows in the matrix.
+	 *
+	 * @see usr.doetsch.linalg.Matrix#getRows()
+	 * @return the number of rows
+	 */
 	public int getN () {
 		return getRows();
 	}
 	
+	/**
+	 * Returns the number of columns in the matrix.
+	 * 
+	 * @return the number of columns
+	 */
 	public int getColumns () {
 		return cells[0].length;
 	}
-	
+
+	/**
+	 * Returns the number of columns in the matrix.
+	 * 
+	 * @se {@link usr.doetsch.linalg.Matrix#getColumns()
+	 * @return the number of columns
+	 */
 	public int getM () {
 		return getColumns();
 	}
@@ -52,8 +85,11 @@ public class Matrix {
 		return new Matrix(rows, columns);
 	}
 	
-
-	@Override
+	/**
+	 * Returns a string representation of the encapsulated matrix.
+	 * 
+	 * @return a String representation of the matrix
+	 */
 	public String toString () {
 		String s = "";
 		
@@ -105,11 +141,11 @@ public class Matrix {
 		
 		for (int row = 0; row < c.getRows(); row++) {
 			for (int column = 0; column < c.getColumns(); column++) {
-				double sum = 0;
+				//double sum = 0;
 				for (int i = 0; i < a[0].length; i++) {
-					sum += a[row][i] * b[i][column];
+					c.cells[row][column] += a[row][i] * b[i][column];
 				}
-				c.cells[row][column] = sum;
+				///c.cells[row][column] = sum;
 			}
 		}
 		
@@ -137,16 +173,17 @@ public class Matrix {
 		
 		long then = System.currentTimeMillis();
 		int i = 0;
-		Matrix f = Matrix.createMatrix(1, 1);
+		Matrix m = null;	
 		
-		
-		while ((System.currentTimeMillis() - then) < 10000) {				
+		while ((System.currentTimeMillis() - then) < 1000) {				
 			//System.out.println(Matrix.multiply(new Matrix(a), new Matrix(b)));
-			Matrix m = Matrix.multiply(f.createMatrix(a), f.createMatrix(b));
+			m = Matrix.multiply(Matrix.createMatrix(a), Matrix.createMatrix(b));
 			i++;
 		}
 		
 		System.out.println(i);
+		
+		System.out.println(m);
 		
 	}
 
