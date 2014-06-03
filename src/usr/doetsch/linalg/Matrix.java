@@ -11,7 +11,7 @@ public class Matrix {
 	 * Creates a new Matrix instance encapsulating the given
 	 * matrix. 
 	 */
-	private Matrix (double[][] matrix) {
+	protected Matrix (double[][] matrix) {
 
 		this.cells = matrix;
 	}
@@ -20,7 +20,7 @@ public class Matrix {
 	 * Creates a new Matrix instance encapsulating a matrix
 	 * with the given dimensions. 
 	 */
-	private Matrix (int rows, int columns) {
+	protected Matrix (int rows, int columns) {
 
 		this.cells = new double[rows][columns];
 	}
