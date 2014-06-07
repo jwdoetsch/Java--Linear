@@ -1,5 +1,12 @@
 package usr.doetsch.linalg;
 
+/**
+ * Matrix is the realization of a two-dimensional algebraic matrix
+ * that utilizes an encapsulation of a two-dimensional double-precision
+ * array to achieve it's representation.  
+ * 
+ * @author Jacob Wesley Doetsch
+ */
 public class Matrix {
 	
 	/**
